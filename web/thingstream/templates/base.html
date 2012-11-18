@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>thingstream</title>
+<link type="text/css" rel="stylesheet" href="static/css/graph.css">
+<link type="text/css" rel="stylesheet" href="static/css/detail.css">
+<link type="text/css" rel="stylesheet" href="static/css/legend.css">
+<link type="text/css" rel="stylesheet" href="static/css/lines.css">
+<link type="text/css" rel="stylesheet" href="static/css/main.css">
+<script src="static/js/d3.v2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+<script src="static/js/rickshaw.js"></script>
+<style>
+body{overflow-x:hidden};
+</style>
+</head>
+
+<link rel="stylesheet" href="static/css/design.css" type="text/css" media="screen" />
+
+<body>
+<div id="chart_container" style="z-index: -1; margin-top: 100px;">
+	<div id="chart"></div>
+	<div id="legend_container">
+		<div id="smoother" title="Smoothing"></div>
+		<div id="legend"></div>
+	</div>
+	<div id="slider"></div>
+</div>
+<div id="slider"></div>
+
+</div>
+<div id="container_alpha">
+
+
+    
+<div id="logo2"><img src="static/img/logo.png" alt="headimage" width="200" /></div>
+<div id="menu"></div>
+<div id="home"><a href="/">Home</a></div>
+<div id="about"><a href="#">About</a></div>
+<div id="instructions"><a href="#">Instructions</a></div>
+<div id="mystreams"><a href="#">MyStreams</a></div>
+<div id="contact"><a href="#">Contact</a></div>
+    {% block content %}{% endblock %}
+<div id="opensource"><img src="static/img/opensource.png" alt="headimage" width="50" /></div>
+<div id="oshw"><img src="static/img/oshw.png" alt="headimage" width="50" /></div>
+</div>
+
+<script>
+
+// set up our data series with 50 random data points
+
+var seriesData = [ [], [], [] ];
+var random = new Rickshaw.Fixtures.RandomData(150);
+
+for (var i = 0; i < 150; i++) {
+	random.addData(seriesData);
+}
+
+// instantiate our graph!
+var chart = $('#chart_container');
+var targetWidth = chart.parent().width();
+var graph = new Rickshaw.Graph( {
+	element: document.getElementById("chart"),
+	width: targetWidth,
+	height: 600,
+	renderer: 'line',
+	series: [
+		{
+			color: "#c05020",
+			data: seriesData[0],
+			name: 'Paris'
+		}, {
+			color: "#30c020",
+			data: seriesData[1],
+			name: 'London'
+		}, {
+			color: "#6060c0",
+			data: seriesData[2],
+			name: 'Berlin'
+		}
+	]
+} );
+
+graph.render();
+
+var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+	graph: graph
+} );
+</script>
+</body>
+</html>

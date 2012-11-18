@@ -1,0 +1,130 @@
+<!doctype>
+<head>
+	<title>thingstream</title>
+	<link type="text/css" rel="stylesheet" href="static/css/graph.css">
+	<link type="text/css" rel="stylesheet" href="static/css/detail.css">
+	<link type="text/css" rel="stylesheet" href="static/css/legend.css">
+	<link type="text/css" rel="stylesheet" href="static/css/lines.css">
+	<link type="text/css" rel="stylesheet" href="static/css/main.css">
+	<script src="static/js/d3.v2.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+	<script src="static/js/rickshaw.js"></script>
+</head>
+<style>
+body{overflow-x:hidden};
+</style>
+<body>
+
+<div id="chart_container" class="main_container">
+	<div id="chart">
+	<div class="textbox">
+		<div id="about_div" style="display: none; top: -10px; left: 450px; width: 500px;" class="item semactive">
+			thingstream is an <strong>open-data</strong> & <strong>open-source</strong> alternative to other internet-of-things time-series datastores.<br/>
+			Running with a high-throughput and secure database backend, thingstream allows for easy <strong>storage</strong> and <strong>retrieval</strong> of any numeric timeseries you could want.<br/>
+		</div>
+	</div>
+	<div class="textbox" style="left: 200px;">
+		<div style="top: 300px; left: 80px;" class="item active">
+		thingstream
+		</div>
+		<div style="top: 220px; left:80px;" class="item semactive" onclick="toggleAbout();">
+		about
+		</div>
+		<div style="top: 380px; left:200px;" class="item semactive">
+		...coming soon.
+		</div>
+	</div>
+	</div>
+	<div id="legend_container">
+		<div id="smoother" title="Smoothing"></div>
+		<div id="legend"></div>
+	</div>
+	<div id="slider"></div>
+</div>
+
+<script>
+
+// set up our data series with 50 random data points
+
+var seriesData = [ [], [], [] ];
+var random = new Rickshaw.Fixtures.RandomData(150);
+
+for (var i = 0; i < 150; i++) {
+	random.addData(seriesData);
+}
+
+var toggleAbout = function(){
+	$('#about_div').fadeToggle(250);
+	//console.log($('#about_div'));
+}
+// instantiate our graph!
+var chart = $('#chart_container');
+var targetWidth = chart.parent().width();
+var graph = new Rickshaw.Graph( {
+	element: document.getElementById("chart"),
+	width: targetWidth,
+	height: 600,
+	id: 'blah',
+	renderer: 'line',
+	series: [
+		{
+			color: "#c05020",
+			data: seriesData[0],
+			name: 'Paris'
+		}, {
+			color: "#30c020",
+			data: seriesData[1],
+			name: 'London'
+		}, {
+			color: "#6060c0",
+			data: seriesData[2],
+			name: 'Berlin'
+		}
+	]
+} );
+
+graph.render();
+
+var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+	graph: graph
+} );
+
+//var svg = $('#rs_svg');
+// var element = document.createElement('div');
+// element.className = 'textbox';
+// element.style.left = '500px';
+// d2 = graph.element.appendChild(element);
+// var tbox = document.createElement('div');
+// tbox.style.top = "300px";
+// tbox.style.left = "500px";
+// tbox.className = 'item active';
+// tbox.innerHTML = "Open Data Store";
+// d2.appendChild(tbox);
+// var tbox2 = document.createElement('div');
+// tbox2.style.top = "100px";
+// tbox2.className = 'item semactive';
+// tbox2.innerHTML = "<a href=\"blah\">About</a>";
+// d2.appendChild(tbox2);
+
+
+// var axes = new Rickshaw.Graph.Axis.Time( {
+// 	graph: graph
+// } );
+
+// var legend = new Rickshaw.Graph.Legend( {
+// 	graph: graph,
+// 	element: document.getElementById('legend')
+
+// } );
+
+// var shelving = new Rickshaw.Graph.Behavior.Series.Toggle( {
+// 	graph: graph,
+// 	legend: legend
+// } );
+//axes.render();
+
+
+</script>
+
+</body>

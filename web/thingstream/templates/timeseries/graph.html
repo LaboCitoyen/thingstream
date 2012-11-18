@@ -1,0 +1,91 @@
+<!doctype>
+<head>
+	<title>thingstream</title>
+	<link type="text/css" rel="stylesheet" href="static/css/graph.css">
+	<link type="text/css" rel="stylesheet" href="static/css/detail.css">
+	<link type="text/css" rel="stylesheet" href="static/css/legend.css">
+	<link type="text/css" rel="stylesheet" href="static/css/lines.css">
+	<link type="text/css" rel="stylesheet" href="static/css/main.css">
+	<script src="static/js/d3.v2.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+	<script src="static/js/rickshaw.js"></script>
+
+</head>
+<style>
+body{overflow-x:hidden};
+</style>
+<body>
+<div id="chart"></div>
+
+<script>
+var urlParams = {};
+(function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+    while (match = search.exec(query))
+       urlParams[decode(match[1])] = decode(match[2]);
+})();
+if (!urlParams.hasOwnProperty('sid')) {
+	alert('Must specify stream \'sid\' parameter.');
+}
+if (!urlParams.hasOwnProperty('start')) {
+	urlParams['start'] = '1h-ago';
+}
+if (!urlParams.hasOwnProperty('username') || urlParams.hasOwnProperty('api_key') ) {
+	//For demo purposes:
+	urlParams['username'] = 'test_view';
+	urlParams['api_key'] = '04296ff362d8240e4c33507834ae00de07f58b3b';
+}
+if (!urlParams.hasOwnProperty('dsample')) {
+	urlParams['dsample'] = '';
+}
+if (!urlParams.hasOwnProperty('x') || !urlParams.hasOwnProperty('x')) {
+	urlParams['x'] = '800';
+	urlParams['y'] = '550';
+}
+var graph = new Rickshaw.Graph.Ajax( {
+	element: document.querySelector("#chart"),
+	width: urlParams['x'],
+	height: urlParams['y'],
+	renderer: 'line',
+	dataURL: 'http://thingstream.com/api/v1/timeseries/'+
+	urlParams['sid'] + 
+	'/data/?format=json&username='+
+	urlParams['username'] +
+	'&api_key=' +
+	urlParams['api_key'] +
+	'&start=' +
+	urlParams['start'] + 
+	'&dsample=' +
+	urlParams['dsample'] +
+	'&json_format=rs',
+	onComplete: function(transport) {
+                var graph = transport.graph;
+                var detail = new Rickshaw.Graph.HoverDetail({ graph: graph });
+                var time = new Rickshaw.Fixtures.Time();
+				var seconds = time.unit('minute');
+
+var yAxis = new Rickshaw.Graph.Axis.Y({
+    graph: graph
+});
+
+yAxis.render();
+                var xAxis = new Rickshaw.Graph.Axis.Time({graph: graph,
+//                	 timeUnit: minute,
+                	 ticksTreatment: 'glow',
+                	});
+                xAxis.render();
+        },
+	series: [ {
+		name: 'series',
+		color: 'blue'
+	} ],
+
+} );
+</script>
+</body>
