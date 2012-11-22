@@ -1,0 +1,291 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+body, html {
+    margin: px;
+    padding: 0px;
+}
+
+body {
+    background: #efefef;
+	background-image:url(../images/background.png);
+    color: #000000;
+    font-family: Helvetica;
+    font-size: 10px;
+	font-color: #000000;
+    height: 100%;
+    width: 100%;
+ 
+}
+
+ a
+{
+color:#000;
+text-decoration:none;
+}
+ 
+a:hover
+{
+color:#6C9;
+text-decoration:bold;
+}
+
+#container_alpha
+
+ {
+ 
+ margin:auto;
+ margin-top:20px;
+z-index:0;
+ position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+ background-color:#FFF;
+    width: 960px;
+    height: 90%;
+  -webkit-border-radius: 8px;
+ -moz-border-radius: 8px;
+ border-radius: 8px;
+-webkit-box-shadow: 3px 3px 10px 1px #444444;
+box-shadow: 3px 3px 10px 1px #444444; 
+
+
+ filter: alpha(opacity=80);opacity: 0.9;
+
+
+
+
+
+}
+
+#menu {
+	position:absolute;
+	border-style:solid;
+    border-width:1px;
+	z-index:1;
+	left: 528px;
+	top: 60px;
+	border-color:#CCCCCC;
+	width:330px;
+	
+}
+
+
+#logo {
+	position:absolute;
+	z-index:1;
+	left: 20px;
+	top: 20px;
+}
+
+#logo2 {
+	position:absolute;
+	z-index:1;
+	left: 20px;
+	top: 5px;
+	width: 150px;
+}
+
+
+#home {
+	position:absolute;
+	font-size: 12px;
+	z-index:1;
+	left: 550px;
+	top: 42px;
+}
+
+
+
+#about {
+	position:absolute;
+	font-size: 12px;
+	z-index:1;
+	left: 600px;
+	top: 42px;
+}
+
+
+#instructions {
+	position:absolute;
+	font-size: 12px;
+	z-index:1;
+	left: 650px;
+	top: 42px;
+}
+
+
+
+#mystreams {
+	position:absolute;
+	font-size: 12px;
+	z-index:1;
+	left: 740px;
+	top: 42px;
+}
+
+
+#contact {
+	position:absolute;
+	font-size: 12px;
+	z-index:1;
+	left: 820px;
+	top: 42px;
+}
+
+
+#about_titre {
+	position:relative;
+	z-index:1;
+	left: 20px;
+	top: 120px;
+	color: #6C9;
+	font-style:bold;
+	font-size:16px;
+}
+
+
+#text_about {
+	position:relative;
+	z-index:1;
+	top: 20px;
+	color:#000;
+	font-size:13px;
+	width: 350px;
+
+}
+
+
+#text_A1 {
+	position:relative;
+	z-index:1;
+	top: 10px;
+	color:#000;
+	font-size:12px;
+	width: 300px;
+	
+	
+}
+
+#A1 {
+	position:relative;
+	z-index:1;
+	top: 20px;
+	color:#000;
+	border:thin;
+	border-color:#999999;
+	border-style:solid;
+	border-width:thin;
+	height:auto;
+	width:300px;
+	cursor:pointer;
+	
+}
+
+
+#date {
+	
+	position:relative;
+	z-index:1;
+	top: 10px;
+	color:#000;
+	font-size:9px;
+	
+	
+}
+
+#image_about {
+	position:absolute;
+	z-index:1;
+	left: 401px;
+	top: 150px;
+}
+
+
+#titre_our_philosophy {
+	position:relative;
+	z-index:1;
+	top: 35px;
+	color: #6C9;
+	font-style:bold;
+	font-size:16px;
+}
+
+#text_our_philosophy {
+	
+	position:relative;
+	z-index:1;
+	top: 5px;
+	color:#000;
+	font-size:13px;
+	width: 350px;
+
+}
+
+#titre_internet {
+	position:relative;
+	z-index:1;
+	top: 30px;
+	color: #6C9;
+	font-style:bold;
+	font-size:16px;
+}
+
+#text_internet {
+	
+	position:relative;
+	z-index:1;
+	top: 5px;
+	color:#000;
+	font-size:13px;
+	width: 350px;
+
+}
+
+
+
+#boutonconnexion {
+	
+	position:absolute;
+	z-index:1;
+	top: 480px;
+	color:#000;
+	font-size:8px;
+	width: 100px;
+	height:10px;
+	left:750px;
+	
+
+}
+
+
+
+#opensource {
+	
+	position:absolute;
+	z-index:1;
+	bottom: 60px;
+	color:#000;
+	width: 100px;
+	height:10px;
+	left:790px;
+	
+
+}
+
+
+#oshw {
+	
+	position:absolute;
+	z-index:1;
+	bottom: 60px;
+	color:#000;
+	width: 100px;
+	height:10px;
+	left:850px;
+	
+
+}
