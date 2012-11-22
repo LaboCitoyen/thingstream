@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'timeseries.views.main', name='home'),
     url(r'^graph$', 'timeseries.views.graph', name='graph'),    
+    url(r'^console$', 'timeseries.views.console', name='console'),    
+
     # url(r'^hello/', include('hello.foo.urls')),
     
     # Uncomment the admin/doc line below to enable admin documentation:
