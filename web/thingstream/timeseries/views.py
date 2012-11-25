@@ -12,12 +12,13 @@ def graph(request):
     return render_to_response('timeseries/graph.html')
 
 def console(request):
-    ot = opentsd.TimeSeriesData(TSD_HOST, TSD_PORT)
-    ret = ot.get(3, start='20m-ago'), q_params={'dsample' : '1m-avg'})
-    try:
-        foo = int(float(ret[-1][1]))
-    except:
-        foo = 0
+    #ot = opentsd.TimeSeriesData(TSD_HOST, TSD_PORT)
+    #ret = ot.get(3, start='20m-ago'), q_params={'dsample' : '1m-avg'})
+    #try:
+    #    foo = int(float(ret[-1][1]))
+    #except:
+    #    foo = 0
+    foo = 5
     return render_to_response('timeseries/console.html', dict(foo=foo))
 
 
