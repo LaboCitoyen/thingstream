@@ -10,7 +10,7 @@ curl --dump-header - -H "Accept: application/json" -H "Content-Type: application
 """
 class ThingStream(object):
 
-    API_URL = 'http://thingstream.com/api/v1/timeseries/{sid}/data/?username={username}&api_key={api_key}'
+    API_URL = 'http://tsp1.thingstream.com/api/v1/timeseries/{sid}/data/?username={username}&api_key={api_key}'
 
     def __init__(self, username, api_key, stream_id):
 
@@ -30,4 +30,4 @@ class ThingStream(object):
         opener.addheaders = [('Accept', 'application/json'), 
                               ('Content-Type', 'application/json')]
         req = urllib2.Request(url=self.url, data=data_json)
-        opener.open(req)
+        return opener.open(req)
