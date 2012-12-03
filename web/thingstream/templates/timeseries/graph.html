@@ -19,7 +19,7 @@ body{overflow-x:hidden};
 
 <div id="chart"></div>
 <h2><span id="title_text"></span></h2>
-<h4>(<span id="unit_text"></span>)</h4>
+<h4><span id="unit_text"></span></h4>
 
 <script>
 var urlParams = {};
@@ -108,8 +108,8 @@ jsonURL = 'http://tsp1.thingstream.net/api/v1/timeseries/' +
 		'/?format=json&username=test_view&api_key=04296ff362d8240e4c33507834ae00de07f58b3b&start=1h-ago&dsample=&json_format=rs';
 $.getJSON(jsonURL, {}, function(json) {
 	console.log(json.name);
-	$("#title_text").html(json.name);
-	$("#unit_text").html(json.unit);
+//	$("#title_text").html(json.name);
+//	$("#unit_text").html(json.unit);
 	unit = json.unit;
 	gen_graph();
 })

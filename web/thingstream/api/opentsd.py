@@ -31,12 +31,12 @@ class TimeSeriesData(object):
         data_string = ("put data.value %d %f sid=%d\n" % (int(timestamp), 
                                                         float(value),
                                                         int(sid)))
-        print data_string
+        #print data_string
         s.send(data_string)
         s.close()
 
 
-    def get(self, sid, start, q_params, **kwargs):
+    def get(self, sid, start, q_params={}, **kwargs):
         """
         Return the ASCII output of a TSD /q query.
         sid: stream id
@@ -70,16 +70,16 @@ class TimeSeriesData(object):
         m_query += 'data.value{sid=%s}&ascii' % int(sid)
         params += m_query
 
-        print params 
+        #print params 
 
         url = self.url + params
         try:
             data = urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
-            print "HTTP error: %d" % e.code
+            #print "HTTP error: %d" % e.code
             return None
         except urllib2.URLError, e:
-            print "Network error: %s" % e.reason.args[1]
+            #print "Network error: %s" % e.reason.args[1]
             return None
 
         ret_list = []
