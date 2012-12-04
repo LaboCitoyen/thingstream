@@ -18,6 +18,7 @@ def console(request):
         foo = int(float(ret[-1][1]))
     except IndexError:
         foo = 0
+    #foo = 5
     return render_to_response('timeseries/console.html', dict(foo=foo))
 
 
