@@ -11,4 +11,4 @@ The ThingStream source tree includes:
 
 ThingStream is an initiative of LaboCitoyen, a French non-profit working on Citizen-Centered scientific projects.
 
-
+More information on how to use ThingStream can be found here: http://wiki.labocitoyen.fr/index.php?n=Software.ThingStream
