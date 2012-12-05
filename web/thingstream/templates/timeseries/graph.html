@@ -16,10 +16,14 @@
 body{overflow-x:hidden};
 </style>
 <body>
+
 <div id="chart"></div>
+<h2><span id="title_text"></span></h2>
+<h4><span id="unit_text"></span></h4>
 
 <script>
 var urlParams = {};
+unit = '';
 (function () {
     var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
@@ -48,44 +52,66 @@ if (!urlParams.hasOwnProperty('x') || !urlParams.hasOwnProperty('x')) {
 	urlParams['x'] = '800';
 	urlParams['y'] = '550';
 }
-var graph = new Rickshaw.Graph.Ajax( {
-	element: document.querySelector("#chart"),
-	width: urlParams['x'],
-	height: urlParams['y'],
-	renderer: 'line',
-	dataURL: 'http://thingstream.com/api/v1/timeseries/'+
-	urlParams['sid'] + 
-	'/data/?format=json&username='+
-	urlParams['username'] +
-	'&api_key=' +
-	urlParams['api_key'] +
-	'&start=' +
-	urlParams['start'] + 
-	'&dsample=' +
-	urlParams['dsample'] +
-	'&json_format=rs',
-	onComplete: function(transport) {
-                var graph = transport.graph;
-                var detail = new Rickshaw.Graph.HoverDetail({ graph: graph });
-                var time = new Rickshaw.Fixtures.Time();
-				var seconds = time.unit('minute');
+function gen_graph() {
+	var graph = new Rickshaw.Graph.Ajax( {
+		element: document.querySelector("#chart"),
+		width: urlParams['x'],
+		height: urlParams['y'],
+		renderer: 'line',
+		dataURL: '/api/v1/timeseries/'+
+		urlParams['sid'] + 
+		'/data/?format=json&username='+
+		urlParams['username'] +
+		'&api_key=' +
+		urlParams['api_key'] +
+		'&start=' +
+		urlParams['start'] + 
+		'&dsample=' +
+		urlParams['dsample'] +
+		'&json_format=rs',
+		onComplete: function(transport) {
+	                var graph = transport.graph;
+	                var detail = new Rickshaw.Graph.HoverDetail({ graph: graph });
+	                var time = new Rickshaw.Fixtures.Time();
+					var seconds = time.unit('minute');
+					
+					var yAxis = new Rickshaw.Graph.Axis.Y({
+	    				graph: graph
+					});
+					yAxis.render();
 
-var yAxis = new Rickshaw.Graph.Axis.Y({
-    graph: graph
-});
+	                var xAxis = new Rickshaw.Graph.Axis.Time({graph: graph,
+	//                	 timeUnit: minute,
+	                	 ticksTreatment: 'glow',
+	                	});
+	                xAxis.render();
 
-yAxis.render();
-                var xAxis = new Rickshaw.Graph.Axis.Time({graph: graph,
-//                	 timeUnit: minute,
-                	 ticksTreatment: 'glow',
-                	});
-                xAxis.render();
-        },
-	series: [ {
-		name: 'series',
-		color: 'blue'
-	} ],
+	                	var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+					graph: graph,
+					formatter: function(series, x, y) {
+						var date = '<span class="date">' + new Date(x * 1000).toUTCString() + '</span>';
+						var swatch = '<span class="detail_swatch"></span>';
+						var content =  'Value' + ": " + parseInt(y) + ' ' + unit + '<br>' + date;
+						return content;
+						}
+					} );
+	        },
+		series: [{
+			name: 'series',
+			color: 'blue'
+		}],
+	} );
 
-} );
+};
+jsonURL = 'http://tsp1.thingstream.net/api/v1/timeseries/' +
+		urlParams['sid']+
+		'/?format=json&username=test_view&api_key=04296ff362d8240e4c33507834ae00de07f58b3b&start=1h-ago&dsample=&json_format=rs';
+$.getJSON(jsonURL, {}, function(json) {
+	console.log(json.name);
+//	$("#title_text").html(json.name);
+//	$("#unit_text").html(json.unit);
+	unit = json.unit;
+	gen_graph();
+})
 </script>
 </body>

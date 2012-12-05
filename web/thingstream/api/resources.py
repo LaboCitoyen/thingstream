@@ -57,7 +57,7 @@ class TimeSeriesResource(ModelResource):
             try:
                 start = request.GET['start']
             except KeyError:
-                start = '6h-ago' #Sane default value
+                start = '1h-ago' #Sane default value
             q_params = {}
             q_params.update(dict([(key, request.GET[key]) for key in self.allowed_q_params if request.GET.has_key(key)]))
             ret_val = client.get(kwargs['pk'], start=start, q_params=q_params,)
